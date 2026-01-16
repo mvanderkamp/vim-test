@@ -185,6 +185,7 @@ endfunction
 
 function! test#strategy#vimux(cmd) abort
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
+    call VimuxOpenRunner()
     call VimuxClearTerminalScreen()
     call VimuxClearRunnerHistory()
     call VimuxRunCommand(s:command(a:cmd))
@@ -281,7 +282,8 @@ function! test#strategy#wezterm(cmd) abort
     let g:test#wezterm#pane_id = l:output[0]
   endif
 
-  call system([l:wezterm, "cli", "send-text", "--no-paste", "--pane-id", g:test#wezterm#pane_id, a:cmd . ""])
+  call system([l:wezterm, "cli", "send-text", "--no-paste", "--pane-id", g:test#wezterm#pane_id, a:cmd . "
+"])
 endfunction
 
 function! s:execute_with_compiler(cmd, script) abort
